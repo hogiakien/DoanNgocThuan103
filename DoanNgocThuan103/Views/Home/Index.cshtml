@@ -1,0 +1,50 @@
+﻿@using DoanNgocThuan103.Models;
+@model IEnumerable<SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+@{
+    IEnumerable<SanPham> listSP1 = (IEnumerable<SanPham>)ViewBag.listSP1;
+    IEnumerable<SanPham> listSP2 = (IEnumerable<SanPham>)ViewBag.listSP2;
+    IEnumerable<SanPham> listSP3 = (IEnumerable<SanPham>)ViewBag.listSP3;
+    IEnumerable<SanPham> listPhuKienMoi = (IEnumerable<SanPham>)ViewBag.listPhuKienMoi;
+}
+
+<div class="container">
+    <br />
+    <br />
+
+    <div class="content-top">
+        <h1>Sách Mới</h1>
+        <div class="grid-in">
+            @Html.Partial("~/Views/SanPham/SanPhamStylePartial.cshtml", listSP1)
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <hr />
+    <div class="content-top">
+        <h1>Màu Sơn mới</h1>
+        <div class="grid-in">
+            @Html.Partial("~/Views/SanPham/SanPhamStylePartial.cshtml", listSP2)
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <hr />
+    <div class="content-top">
+        <h1>Bút Bi Mới</h1>
+        <div class="grid-in">
+            @Html.Partial("~/Views/SanPham/SanPhamStylePartial.cshtml", listSP3)
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <hr />
+    <div class="content-top">
+        <h1>Phụ kiện khác</h1>
+        <div class="grid-in">
+            @Html.Partial("~/Views/SanPham/SanPhamStylePartial.cshtml", listPhuKienMoi)
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <script type="text/javascript" src="https://ahachat.com/customer-chats/customer_chat_3sFPZJ9tzu5ec3b3935d348.js"></script>
+</div>

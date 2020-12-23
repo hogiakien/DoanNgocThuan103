@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PermissionError</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Bạn không có quyền truy cập trang này hoặc đã hết phiên làm việc vui lòng đăng nhập lại với quyền của mình</h1>
+        <br />
+        <div>
+            @Html.ActionLink("Trở về trang chủ", "Index")
+        </div>
+    </div>
+</body>
+</html>

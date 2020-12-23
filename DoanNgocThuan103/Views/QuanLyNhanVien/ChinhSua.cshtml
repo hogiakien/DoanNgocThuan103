@@ -1,0 +1,159 @@
+﻿@model DoanNgocThuan103.Models.ThanhVien
+
+@{
+    ViewBag.Title = "ChinhSua";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+@if (ViewBag.ThongBao == "Cập nhật thành công")
+{
+    <br />
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@ViewBag.ThongBao</strong>
+    </div>
+}
+
+<h2>Chỉnh sửa thông tin nhân viên</h2>
+
+@using (Html.BeginForm("ChinhSua", "QuanLyNhanVien", FormMethod.Post, new { id = "form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaThanhVien)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Tài khoản</label>
+            <div class="col-md-10">
+                <input type="text" name="TaiKhoan" id="TaiKhoan" data-error="#errTaiKhoan" value="@Model.TaiKhoan" class="form-control" />
+                <span style="color: red" id="errTaiKhoan"></span>
+            </div>
+        </div>
+        
+        <input type="hidden" name="MatKhau" id="MatKhau" data-error="#errMatKhau" value="@Model.MatKhau" />
+        @*<div class="form-group">
+            <label class="control-label col-md-2">Mật khẩu</label>
+            <div class="col-md-10">
+                <input type="password" name="MatKhau" id="MatKhau" data-error="#errMatKhau" value="@Model.MatKhau" class="form-control" />
+                <span style="color: red" id="errMatKhau"></span>
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Họ tên</label>
+            <div class="col-md-10">
+                <input type="text" name="HoTen" id="HoTen" data-error="#errHoTen" value="@Model.HoTen" class="form-control" />
+                <span style="color: red" id="errHoTen"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Địa chỉ</label>
+            <div class="col-md-10">
+                <input type="text" name="DiaChi" id="DiaChi" data-error="#errDiaChi" value="@Model.DiaChi" class="form-control" />
+                <span style="color: red" id="errDiaChi"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Email</label>
+            <div class="col-md-10">
+                <input type="text" name="Email" id="Email" data-error="#errEmail" value="@Model.Email" class="form-control" />
+                <span style="color: red" id="errEmail"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Số điện thoại</label>
+            <div class="col-md-10">
+                <input type="text" name="SoDienThoai" id="SoDienThoai" data-error="#errSDT" value="@Model.SoDienThoai" class="form-control" />
+                <span style="color: red" id="errSDT"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cập nhật" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index","QuanLyNhanVien")
+</div>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script>
+    $(document)
+        .ready(function() {
+            $("#form").validate({
+                rules: {
+                    HoTen: {
+                        required: true
+                    },
+                    DiaChi: {
+                        required: true
+                    },
+                    SoDienThoai: {
+                        required: true,
+                        digits: true,
+                        minlength: 9,
+                        maxlength: 11
+                    },
+                    TaiKhoan: {
+                        required: true,
+                        minlength: 5
+                    },
+                    //MatKhau: {
+                    //    required: true,
+                    //    minlength: 5
+                    //},
+                    Email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    HoTen: {
+                        required: "Họ tên không được bỏ trống"
+                    },
+                    DiaChi: {
+                        required: "Địa chỉ không được bỏ trống"
+                    },
+                    SoDienThoai: {
+                        required: "Số điện thoại không được bỏ trống",
+                        digits: "Số điện thoại phải là số",
+                        minlength: "Ít nhất 9 số",
+                        maxlength: "Tối đa 11 số"
+                    },
+                    TaiKhoan: {
+                        required: "Tài khoản không được bỏ trống",
+                        minlength: "Ít nhất 5 ký tự"
+                    },
+                    MatKhau: {
+                        required: "Mật khẩu không được bỏ trống",
+                        minlength: "Ít nhất 5 ký tự"
+                    },
+                    Email: {
+                        required: "Email không được bỏ trống",
+                        email: "Email không hợp lệ"
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error);
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+        });
+</script>

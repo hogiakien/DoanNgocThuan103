@@ -1,0 +1,22 @@
+﻿@*Dùng viewbag để thể hiện tổng số lượng và tổng tiền có trong giỏ hàng*@
+<div class="cart box_1">
+    <a href="@Url.Action("XemGioHang","GioHang")">
+        <h3>
+            <div class="total">
+                @if (@ViewBag.TongTien.ToString() == "0")
+                {
+                    <span>0 VNĐ (<span>@ViewBag.TongSoLuong</span> sản phẩm)</span>
+                }
+                else
+                {
+                    <span>@ViewBag.TongTien.ToString("#,##") VNĐ (<span>@ViewBag.TongSoLuong</span> sản phẩm)</span>
+                }
+                
+            </div>
+            <img src="~/Content/images/cart.png" alt="">
+        </h3>
+    </a>
+    <p>
+        <a href="@Url.Action("XemGioHang","GioHang")" class="simpleCart_empty">Xem giỏ hàng</a>
+    </p>
+</div>

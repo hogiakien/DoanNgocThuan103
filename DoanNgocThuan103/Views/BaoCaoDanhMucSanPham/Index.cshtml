@@ -1,0 +1,71 @@
+﻿@model PagedList.IPagedList<DoanNgocThuan103.Models.SanPham>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<div class="x_panel">
+    @*Header of Report*@
+    <div class="x_title">
+        <h1 style="color:gray;font-family:'Times New Roman', Times, serif">Báo cáo danh mục sản phẩm</h1>
+
+        <div class="clearfix"></div>
+    </div>
+    <br />
+
+    <div class="x_content">
+        @*Table Show Product Report*@
+        <table class="table table-striped table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Loại sản phẩm</th>
+                    <th>Số lượng tồn</th>
+                    <th>Giá</th>
+                    <th>Nhà cung cấp</th>
+                    <th>Nhà sản xuất</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count != 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MaSP</td>
+                            <td>@item.TenSP</td>
+                            <td>@item.LoaiSanPham.TenLoai</td>
+                            <td>@item.SoLuongTon</td>
+                            <td>@item.DonGia</td>
+                            <td>@item.NhaCungCap.TenNCC</td>
+                            <td>@item.NhaSanXuat.TenNSX</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6">NO RESULT</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="col-md-12">
+            <div class="col-md-8"></div>
+            <div class="col-md-4"><span class="pull-right">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</span></div>
+        </div>
+
+        
+        <div class="pull-right">
+            <a type="button" class="btn btn-success panel_toolbox" href="@Url.Action("ExportExel", "BaoCaoDanhMucSanPham")">Xuất file excel</a>
+        </div>
+   
+    </div>
+</div>
+
+

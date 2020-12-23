@@ -1,0 +1,133 @@
+﻿@{
+    var listQuyen = ViewBag.lstQuyen;
+}
+
+<div class="col-md-3 side-bar">
+    <div class="logo text-center">
+        <a href="@Url.Action("QuanTri","Home")"><img width="171" height="48" src="~/Content/images/sanpham/logoe.jpg" alt=""></a>
+    </div>
+    <div class="navigation">
+        <h3>Các chức năng chính</h3>
+        @*link tới quản lý sản phẩm và quản lý phiếu nhập *@
+        @if (Session["TaiKhoan"] != null)
+        {
+            foreach (String itemQuyen in listQuyen)
+            {
+                switch (itemQuyen)
+                {
+                    case "QuanLySanPham":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index", "QuanLySanPham")">Quản lý sản phẩm</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "PhanQuyen":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index", "PhanQuyen")">Phân quyền</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "ThongKe":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index", "ThongKe")">Thống Kê</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "BaoCaoTonKho":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index", "BaoCaoDanhMucSanPham")">Báo cáo tồn kho</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "QuanLyKhachHang":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index", "QuanLyKhachHang")">Quản lý khách hàng</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "QuanLyNhanVien":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index", "QuanLyNhanVien")">Quản lý nhân viên</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "QuanLyNhaCungCap":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index", "QuanLyNhaCungCap")">Quản lý nhà cung cấp</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "QuanLyNhaSanXuat":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index", "QuanLyNhaSanXuat")">Quản lý nhà sản xuất</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "QuanLyDonHang":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("ChuaThanhToan", "QuanLyDonHang")">Quản lý đơn hàng</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "DSSPSapHetHang":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("DSSPHetHang", "QuanLyPhieuNhap")">Sản phẩm sắp hết hàng</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "QuanLyPhieuNhap":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("NhapHang", "QuanLyPhieuNhap")">Quản lý phiếu nhập hàng</a></li>
+                            </ul>
+                            break;
+                        }
+                    case "QuanLyDanhMucSanPham":
+                        {
+                            <ul>
+                                <li><a href="@Url.Action("Index","QuanLyDanhMucSanPham")">Quản Lý Danh Mục Sản Phẩm</a> </li>
+
+                            </ul>
+                            break;
+                        }
+                    case "QuanLyMaLoaiSanPham":
+                        {
+                            <ul>
+
+                                <li><a href="@Url.Action("Index","QuanLyMaLoaiSanPham")">Quản Lý Mã Loại Sản Phẩm</a> </li>
+                            </ul>
+                            break;
+                        }
+                    case "Log":
+                        {
+                            <ul>
+
+                                <li><a href="@Url.Action("Index","Log")">Lịch Sử Hoạt Động</a> </li>
+                            </ul>
+                            break;
+                        }
+                    case "ThanhVien":
+                        {
+                            <ul>
+
+                                <li><a href="@Url.Action("Index","ThanhVien")">Quản Lý Tài Khoản</a> </li>
+                            </ul>
+                            break;
+                        }
+
+                }
+            }
+        }
+    </div>
+
+</div>

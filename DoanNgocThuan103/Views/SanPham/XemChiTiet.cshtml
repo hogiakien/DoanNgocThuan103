@@ -1,0 +1,172 @@
+﻿@model DoanNgocThuan103.Models.SanPham
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+<div class="container-fluid">
+    <div class="col-md-9">
+        <div class="col-md-5 product-price">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li data-thumb="@Url.Content("~/Content/images/sanpham/" + Model.HinhAnh)">
+                        <img src="@Url.Content("~/Content/images/sanpham/" + Model.HinhAnh)" />
+                    </li>
+                    <li data-thumb="@Url.Content("~/Content/images/sanpham/" + Model.HinhAnh1)">
+                        <img src="@Url.Content("~/Content/images/sanpham/" + Model.HinhAnh1)" />
+                    </li>
+                    <li data-thumb="@Url.Content("~/Content/images/sanpham/" + Model.HinhAnh2)">
+                        <img src="@Url.Content("~/Content/images/sanpham/" + Model.HinhAnh2)" />
+                    </li>
+                    <li data-thumb="@Url.Content("~/Content/images/sanpham/" + Model.HinhAnh2)">
+                        <img src="@Url.Content("~/Content/images/sanpham/" + Model.HinhAnh2)" />
+                    </li>
+                </ul>
+            </div>
+            <!-- FlexSlider -->
+            <script defer src="~/Content/js/jquery.flexslider.js"></script>
+            <link rel="stylesheet" href="~/Content/css/flexslider.css" type="text/css" media="screen" />
+
+            <script>
+                // Can also be used with $(document).ready()
+                $(window).load(function () {
+                    $('.flexslider').flexslider({
+                        animation: "slide",
+                        controlNav: "thumbnails"
+                    });
+                });
+            </script>
+
+        </div>
+        <div class="col-md-7 product-price1 simpleCart_shelfItem">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="@Url.Action("Index", "Home")">Home</a>
+                </li>
+                <li>
+                    <a href="javascript:history.go(-1)">Back</a>
+                </li>
+                <li class="active">Current</li>
+            </ol>
+            <div class="single-para ">
+                <div class="page-header">
+                    <h1>
+                        <small> @Model.TenSP</small>
+                    </h1>
+                </div>
+                <div class="star-on">
+                    <div class="review">
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="col-md-5">
+                    <h2>Giá:</h2>
+                    <h5 class="item_price">@Model.DonGia.Value.ToString("#,##") VNĐ</h5>
+                </div>
+                <div class="col-md-5">
+                    <div id="page-wrapper">
+                        <div class="container-fluid">
+                            <!-- /.row -->
+                            <div class="row">
+                                <div class="">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <i class="fa fa-eye fa-5x"></i>
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <div style="font-size:30px">@Model.LuotXem</div>
+                                                    <div>Số lượt xem!</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="">
+                                            <div class="panel-footer">
+                                                <span class="pull-left"></span>
+                                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- /.container-fluid -->
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        @Html.Raw(Model.CauHinh)
+                    </p>
+                    <a href="@Url.Action("ThemGioHang","GioHang", new {MaSP=Model.MaSP, strURL=Request.Url.ToString()})" class="add-cart item_add">Đặt hàng</a>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+            <br />
+            <br />
+            <br />
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <h3>Đặc điểm chính</h3>
+                <hr />
+                @Html.Raw(Model.MoTa)
+            </div>
+            <div class="fb-comments" data-href="http://localhost:60262/" data-numposts="5" data-width=""></div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+   
+    <div class="col-md-3">
+        <div class="panel panel-primary sty">
+            <div class="panel-heading" style="background-color: rgb(40, 138, 214);">
+                <h3 class="panel-title">DỊCH VỤ & KHUYẾN MÃI LIÊN QUAN</h3>
+            </div>
+            <div class="panel-body">
+                <ul style="padding-left: 15px;">
+                    <li style="color: rgb(85, 85, 85); text-align: left; font-size: 14px; margin-bottom: 10px;">Đăng kí Thành Viên để nhận giao hàng miễn phí và nhiều ưu đãi dành riêng cho thành viên WebSite </li>
+                    <li style="color: rgb(85, 85, 85); text-align: left; font-size: 14px; margin-bottom: 10px;">Nhập mã ZALOPAY15 - Giảm ngay 15k cho đơn hàng từ 30k khi thanh toán qua ví ZaloPayThời gian: 25/3 - 15/5/2020 - CHỈ ÁP DỤNG MUA SẮM TRÊN APP TIKI - Mỗi KH áp dụng 1 lần.</li>
+                    <li style="color: rgb(85, 85, 85); text-align: left; font-size: 14px; margin-bottom: 10px;">Đăng ký dịch vụ BookCare để được bọc plastic đến 99% sách</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="background-color: rgb(255, 0, 0); color: #fff">
+                <h3 class="panel-title">HƯỚNG DẪN MUA HÀNG</h3>
+            </div>
+            <div class="panel-body">
+                <ul style="padding-left: 15px;">
+                    <li>Cần tư vấn, inbox yêu cầu TẠI ĐÂY</li>
+                    <li>Đặt mua trực tiếp trên website và nhân viên bán hàng sẽ gọi lại cho Quý khách hàng</li>
+                    <li>Gọi ngay 0904.620.620 - 0943.13.3333</li>
+                    <li>Đến địa chỉ: Trường Đại Học Ngoại Ngữ và Tin Học TPHCM</li>
+                    <li>Mua sỉ / Số lượng lớn xin gọi 0904.620.620 để được hỗ trợ</li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+        <form action="" method="POST" class="form-horizontal" role="form">
+            <div class="form-group">
+
+                
+
+            </div>
+
+        </form>
+    </div>
+</div>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=880939735758500&autoLogAppEvents=1"></script>
+<style>
+    #map_canvas {
+        width: 99%;
+        height: 200px;
+        border: solid 1px #ccc;
+    }
+</style>
+

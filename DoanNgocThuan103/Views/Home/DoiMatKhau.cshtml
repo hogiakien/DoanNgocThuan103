@@ -1,0 +1,133 @@
+﻿
+@{
+    Layout = null;
+    var tv = (DoanNgocThuan103.Models.ThanhVien)Session["TaiKhoan"];
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Đổi mật khẩu</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/assets/admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="~/assets/admin/css/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="~/assets/admin/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/assets/admin/css/startmin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="~/assets/admin/css/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="~/assets/admin/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!--chart-->
+    <link href="~/assets/admin/c3/c3.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sửa mật khẩu tài khoản <span style="color:blue">@tv.TaiKhoan</span> </h3>
+                        @if (Session["error"] != null)
+                        {
+                            <h5 class="alert alert-danger">@Session["error"]</h5>
+                        }
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("frmDoiMatKhau", "Home", FormMethod.Post, new { id = "frmChangePass"}))
+                        {
+                            <input type="hidden" name="MaThanhVien" value="@tv.MaThanhVien"/>
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Nhập mật khẩu cũ" name="exMatKhau" type="password" autofocus required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="password" placeholder="Nhập mật khẩu mới" name="reMatKhau" type="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Nhập lại mật khẩu" name="MatKhau" type="password" required>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Sửa mật khẩu</button>
+                            </fieldset>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="~/assets/admin/js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/assets/admin/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/assets/admin/js/metisMenu.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <!-- Morris Charts JavaScript -->
+    @*<script src="~/assets/admin/js//raphael.min.js"></script>
+        <script src="~/assets/admin/js//morris.min.js"></script>
+        <script src="~/assets/admin/js//morris-data.js"></script>*@
+
+    <script src="~/assets/admin/c3/c3.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/assets/admin/js/startmin.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //validate form
+            $("#frmChangePass").validate({
+                rules: {
+                    exMatKhau: "required",
+                    reMatKhau: "required",
+                    MatKhau:  {
+                        required: true,
+                        equalTo: "#password"
+                    }
+                },
+                messages: {
+                    exMatKhau: "Vui lòng nhập mật khẩu cũ",
+                    reMatKhau: "Vui lòng nhập mật khẩu mới",
+                    MatKhau: {
+                        required: "Vui lòng nhập lại mật khẩu",
+                        equalTo: 'Mật khẩu không trùng'
+                    }
+                }
+            });
+        });
+    </script>
+
+
+</body>
+</html>
+
+

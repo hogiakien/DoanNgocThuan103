@@ -1,0 +1,126 @@
+﻿@model DoanNgocThuan103.Models.NhaCungCap
+
+@{
+    ViewBag.Title = "ChinhSua";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+@if (ViewBag.ThongBao == "Cập nhật thành công")
+{
+    <br />
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@ViewBag.ThongBao</strong>
+    </div>
+}
+
+
+@using (Html.BeginForm("ChinhSua", "QuanLyNhaCungCap", FormMethod.Post, new { id = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Chỉnh sửa nhà cung cấp</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaNCC)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên nhà cung cấp</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="TenNCC" name="TenNCC" data-error="#errTenNCC" value="@Model.TenNCC">
+                <span style="color: red" id="errTenNCC"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Địa chỉ</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="DiaChi" name="DiaChi" data-error="#errDiaChi" value="@Model.DiaChi">
+                <span style="color: red" id="errDiaChi"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Email</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="Email" name="Email" data-error="#errEmail" value="@Model.Email">
+                <span style="color: red" id="errEmail"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Số điện thoại</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" id="SoDienThoai" name="SoDienThoai" data-error="#errSoDienThoai" value="@Model.SoDienThoai">
+                <span style="color: red" id="errSoDienThoai"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cập nhật" id="btnCapNhat" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script>
+    $(document)
+        .ready(function () {
+            $("#form").validate({
+                rules: {
+                    TenNCC: {
+                        required: true
+                    },
+                    DiaChi: {
+                        required: true
+                    },
+                    SoDienThoai: {
+                        required: true,
+                        digits: true,
+                        minlength: 9,
+                        maxlength: 11
+                    },
+                    Email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    TenNCC: {
+                        required: "Tên nhà cung cấp không được bỏ trống"
+                    },
+                    DiaChi: {
+                        required: "Địa chỉ không được bỏ trống"
+                    },
+                    SoDienThoai: {
+                        required: "Số điện thoại không được bỏ trống",
+                        digits: "Số điện thoại phải là số",
+                        minlength: "Ít nhất 9 số",
+                        maxlength: "Tối đa 11 số"
+                    },
+                    Email: {
+                        required: "Email không được bỏ trống",
+                        email: "Email không hợp lệ"
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error);
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+        });
+</script>

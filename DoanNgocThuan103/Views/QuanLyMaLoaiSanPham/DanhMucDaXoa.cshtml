@@ -1,0 +1,64 @@
+﻿@using DoanNgocThuan103.Models;
+@model IEnumerable<MaLoaiSanPham>
+@{
+    ViewBag.Title = "DanhMucDaXoa";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    //Khởi tạo control webgrid
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 5);
+}
+@if (TempData["ThongBao"] == "Hoàn tác thành công")
+{
+    <br />
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Hoàn tác thành công!</strong>
+    </div>
+}
+<h2>Danh sách đã xóa</h2>
+
+@*Thể hiện dữ liệu thông qua control webGrid*@
+@grid.GetHtml(
+    tableStyle: "table table-bordered",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+    grid.Column("IdMLSP", "Mã loại sản phẩm"),
+    grid.Column("TenLSP", "Tên loại"),
+    grid.Column("ThongTin", "Thông Tin"),
+    grid.Column("Logo", "Logo", format: p => @Html.Raw("<img width=\"100\" height=\"100\" src=\"../Content/images/sanpham/" + p.Logo + "\">")),
+    grid.Column(format: p => @Html.ActionLink("Hoàn tác", "HoanTac", new { id = p.IdMLSP }, new { @class = "btn btn-success" }))
+    ))
+<div>
+    <a class="btn btn-lg btn-primary" href="@Url.Action("Index", "QuanLyMaLoaiSanPham")" role="button">Back List</a>
+</div>
+@*Css cho từng Style của table*@
+<style>
+    .divTable {
+        width: 100%;
+        border: 1px solid #999999;
+        text-align: center;
+    }
+
+        .divTable td {
+        }
+
+    .gridHead {
+        background-color: #4CAF50;
+    }
+
+        .gridHead > th > a {
+            color: #fff;
+        }
+
+        .gridHead > th {
+            color: #fff;
+            text-align: center;
+        }
+
+    .gridFooter {
+        font-weight: bold;
+        color: red;
+    }
+</style>

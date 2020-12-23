@@ -1,0 +1,181 @@
+﻿@model DoanNgocThuan103.Models.ThanhVien
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Layout/DangKyLayout.cshtml";
+}
+
+@if (ViewBag.ThongBao == "Thêm thành công")
+{
+    <br />
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@ViewBag.ThongBao</strong>
+    </div>
+}
+
+@if (ViewBag.ThongBao == "Tên tài khoản đã tồn tại")
+{
+    <br />
+    <div class="alert alert-danger alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@ViewBag.ThongBao</strong>
+    </div>
+}
+
+
+<div class="DangKy">
+    <div class=" register">
+
+        <h1>Đăng ký thành viên</h1>
+        @using (Html.BeginForm("DangKy", "Home", FormMethod.Post, new { id = "signupform" }))
+        {
+            <div class="col-md-6 register-top-grid">
+                <h3>Thông tin cá nhân</h3>
+                <div class="titleclass">
+                    <label class="control-label">Họ tên</label>
+                    <input type="text" name="HoTen" id="HoTen" data-error="#errHoTen" value="" />
+                    <span style="color: red" id="errHoTen"></span>
+                </div>
+                <div class="titleclass">
+                    <label class="control-label">Địa chỉ</label>
+                    <input type="text" name="DiaChi" id="DiaChi" data-error="#errDiaChi" value="" />
+                    <span style="color: red" id="errDiaChi"></span>
+                </div>
+                <div class="titleclass">
+                    <label class="control-label">Email</label>
+                    <input type="text" name="Email" id="Email" data-error="#errEmail" value="" />
+                    <span style="color: red" id="errEmail"></span>
+                </div>
+                <div class="titleclass">
+                    <label class="control-label">Số điện thoại</label>
+                    <input type="text" name="SoDienThoai" id="SoDienThoai" data-error="#errSDT" value="" />
+                    <span style="color: red" id="errSDT"></span>
+                </div>
+            </div>
+            <div class="col-md-6 register-bottom-grid register-top-grid">
+                <h3>Thông tin đăng nhập</h3>
+                <div class="titleclass">
+                    <label class="control-label">Tài khoản</label>
+                    <input type="text" name="TaiKhoan" id="TaiKhoan" data-error="#errTaiKhoan" value="" />
+                    <span style="color: red" id="errTaiKhoan"></span>
+                </div>
+                <div class="titleclass">
+                    <label class="control-label">Mật khẩu</label>
+                    <input type="password" name="MatKhau" id="MatKhau" data-error="#errMatKhau" value="" />
+                    
+                    <span style="color: red" id="errMatKhau"></span>
+                </div>
+                <div class="titleclass">
+                    <label class="control-label">Nhập lại mật khẩu</label>
+                    <input type="password" name="NhapLaiMatKhau" id="NhapLaiMatKhau" data-error="#errNhapLaiMatKhau" value="" />
+                    <span style="color: red" id="errNhapLaiMatKhau"></span>
+                </div>
+
+                <input value="Đăng ký" type="submit">
+            </div>
+            <div class="clearfix"> </div>
+        }
+    </div>
+</div>
+
+<style>
+    .titleclass {
+        margin-top: 1%;
+        text-align: left;
+    }
+
+    .dropdownCustom {
+        padding: 1em;
+        margin: 1em 0;
+        height: auto;
+        border: 1px solid #A09F9F;
+        border-radius: 0;
+    }
+
+    .register-bottom-grid span {
+        color: red;
+    }
+
+    .register-top-grid span {
+        color: red;
+    }
+</style>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script>
+    $(document)
+        .ready(function () {
+            $("#signupform").validate({
+                rules: {
+                    HoTen: {
+                        required: true
+                    },
+                    DiaChi: {
+                        required: true
+                    },
+                    SoDienThoai: {
+                        required: true,
+                        digits: true,
+                        minlength: 9,
+                        maxlength: 11
+                    },
+                    TaiKhoan: {
+                        required: true,
+                        
+                        minlength: 5
+                    },
+                    MatKhau: {
+                         
+                        required: true,
+                        minlength: 5
+                    },
+                    NhapLaiMatKhau: {
+                        equalTo: "#MatKhau"
+                    },
+                    Email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    HoTen: {
+                        required: "Họ tên không được bỏ trống"
+                    },
+                    DiaChi: {
+                        required: "Địa chỉ không được bỏ trống"
+                    },
+                    SoDienThoai: {
+                        required: "Số điện thoại không được bỏ trống",
+                        digits: "Số điện thoại phải là số",
+                        minlength: "Ít nhất 9 số",
+                        maxlength: "Tối đa 10 số"
+                    },
+                    TaiKhoan: {
+                        required: "Tài khoản không được bỏ trống",
+                        minlength: "Ít nhất 5 ký tự"
+                    },
+                    MatKhau: {
+                        required: "Mật khẩu không được bỏ trống",
+                        minlength: "Ít nhất 5 ký tự"
+                    },
+                    NhapLaiMatKhau: {
+                        equalTo: "Không khớp với mật khẩu"
+                    },
+                    Email: {
+                        required: "Email không được bỏ trống",
+                        email: "Email không hợp lệ"
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error);
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+        });
+</script>
+

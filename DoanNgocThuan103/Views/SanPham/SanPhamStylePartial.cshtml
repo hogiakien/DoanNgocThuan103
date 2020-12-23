@@ -1,0 +1,25 @@
+﻿@using DoanNgocThuan103.Models
+@model IEnumerable<SanPham>
+
+@foreach (var item in Model.Take(3))
+{
+<div class="col-md-4 grid-top">
+    <br />
+    <br />
+    <br />
+    <a href="@Url.Action("XemChiTiet","SanPham",new{@id=item.MaSP})" class="b-link-stripe b-animate-go  thickbox">
+        <img class="img-responsive" src="@Url.Content("/Content/images/sanpham/"+item.HinhAnh)" alt="">
+        <div class="b-wrapper">
+            <h3 class="b-animate b-from-left    b-delay03 " style="text-align: left; padding-left: 20px;">
+                <span>@Html.Raw(item.CauHinh)</span>
+            </h3>
+        </div>
+    </a>
+
+
+    <p>
+        <a href="@Url.Action("XemChiTiet","SanPham",new{@id=item.MaSP})">@item.TenSP</a>
+    </p>
+    <br />
+</div>
+}

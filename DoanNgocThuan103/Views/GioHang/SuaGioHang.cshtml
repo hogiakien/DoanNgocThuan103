@@ -1,0 +1,91 @@
+﻿@using DoanNgocThuan103.Models
+@model ItemGioHang
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+
+@{
+    List<ItemGioHang> lstGioHang = ViewBag.GioHang as List<ItemGioHang>;
+}
+
+<div class="container">
+    <table class="table" style="text-align: center;">
+        <tr style="background-color: #4CAF50; color: white;">
+            <td>Mã SP</td>
+            <td>Tên SP</td>
+            <td>Hình ảnh</td>
+            <td>Số lượng</td>
+            <td>Đơn giá</td>
+            <td>Thành tiền</td>
+            <td></td>
+        </tr>
+        @foreach (var item in lstGioHang)
+        {
+            //Sản phẩm có mã sản phẩm được chỉnh gửi từ tham số bên trang xem giỏ hàng
+
+            if (Model.MaSP == item.MaSP)
+            {
+                using (Html.BeginForm("CapNhatGioHang", "GioHang"))
+                {
+                    <tr style="background-color: #f2f2f2;">
+                        <td>@item.MaSP @Html.Hidden("MaSP", item.MaSP)</td>
+                        <td>@item.TenSP</td>
+                        <td><img src="@Url.Content("~/Content/images/sanpham/"+item.HinhAnh)" width="100" height="100" /></td>
+                        <td>
+                            <input type="number" value="@item.SoLuong" class="SoLuongThayDoi" name="SoLuong" />
+                            @*@Html.TextBox("SoLuong", item.SoLuong, new {@class = "SoLuongThayDoi"})*@
+                            <p id="TB_SoLuongThayDoi"></p>
+                        </td>
+                        <td>@item.DonGia.ToString("#,##") VNĐ <span id="dongia" style="display: none">@item.DonGia.ToString()</span></td>
+
+                        <td id="thanhtien">@item.ThanhTien.ToString("#,##") VNĐ</td>
+                        <td>
+                            <input type="submit" value="Cập nhật" id="btnCapNhatGH" class="btn btn-success" />
+                            @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP }, new { @class = "btn btn-danger" })
+                        </td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr style="background-color: #f2f2f2;">
+                    <td>@item.MaSP</td>
+                    <td>@item.TenSP</td>
+                    <td><img src="@Url.Content("~/Content/images/sanpham/"+item.HinhAnh)" width="100" height="100" /></td>
+                    <td>@item.SoLuong</td>
+                    <td>@item.DonGia.ToString("#,##") VND</td>
+                    <td>@item.ThanhTien.ToString("#,##") đồng</td>
+                    <td>
+                        @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        }
+    </table>
+    @*Kiểm tra số lượng thay đổi*@
+    <script>
+        $(document)
+            .ready(function () {
+                $("#btnCapNhatGH").click(function () {
+                    //Kiểm tra số lượng không phải là số hoặc nhỏ hơn 0
+                    var SoLuong = $(".SoLuongThayDoi").val();
+                    if (isNaN(SoLuong) === true || SoLuong < 0) {
+                        $("#TB_SoLuongThayDoi").text("Số lượng không hợp lệ!");
+                        return false;
+                    }
+                    return true;
+                });
+                $(".SoLuongThayDoi").keyup(function () {
+                    var thanhtien = parseFloat($("#dongia").text()) *
+                        parseInt($(".SoLuongThayDoi").val());
+                    $('#thanhtien').html(thanhtien + " VNĐ");
+                });
+            });
+
+    </script>
+   
+</div>

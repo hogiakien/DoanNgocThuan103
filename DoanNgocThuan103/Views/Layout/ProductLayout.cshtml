@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Site bán hàng </title>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- jQuery (cần thiết cho Bootstrap's JavaScript plugins) -->
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- file css tùy chỉnh -->
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'><!--//fonts-->
+    <!-- start menu -->
+    <link href="~/Content/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Content/js/memenu.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".memenu").memenu();
+        });
+    </script>
+    <script src="~/Content/js/simpleCart.min.js"> </script>
+</head>
+<body>
+    <!-- header -->
+    <div class="header">
+        @Html.Partial("~/Views/Layout/HeaderTopPartial.cshtml")
+        <div class="container">
+            <div class="head-top">
+                <div class="logo">
+                    <a href="@Url.Action("Index", "Home")"><img src="~/Content/images/sanpham/logoe.jpg" alt="" style="width:165px;height:50px;"></a>
+                </div>
+                @Html.Action("MenuPartial", "Home")
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+    <!-- content -->
+    <div class="product">
+        @RenderBody()
+    </div>
+    <!-- end content -->
+    <!-- footer -->
+      @Html.Partial("~/Views/Layout/FooterPartial.cshtml")
+    <!-- end footer -->
+</body>
+</html>

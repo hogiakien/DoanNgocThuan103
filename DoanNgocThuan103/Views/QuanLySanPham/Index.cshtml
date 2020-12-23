@@ -1,0 +1,65 @@
+﻿@using DoanNgocThuan103.Models;
+@model IEnumerable<DoanNgocThuan103.Models.SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+
+    // Khởi tạo control WebGrid
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+
+@Html.ActionLink("Thêm sản phẩm", "TaoMoi", null, new { @class = "btn btn-success" })
+@Html.ActionLink("Danh sách sản phẩm đã xóa", "DanhSachDaXoa", null, new { @class = "btn btn-success" })
+
+    @* Tạo form submit  về action tìm kiếm*@
+    @using (@Html.BeginForm("TimKiem", "TimKiemSP"))
+    {
+        <input type="text" name="sTuKhoa" placeholder="Nhập từ khóa...">
+        <input type="submit" value="Tìm kiếm">
+    }
+<br /><br />
+@*Thể hiện dữ liệu thông qua control webGrid*@
+@grid.GetHtml(
+    tableStyle: "divTable table table-bordered",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+    grid.Column("MaSP", "Mã sản phẩm"),
+    grid.Column("TenSP", "Tên SP"),
+    grid.Column("HinhAnh", "Hình ảnh", format: p => @Html.Raw("<img width=\"100\" height=\"100\" src=\"../Content/images/sanpham/" + p.HinhAnh + "\">")),
+    grid.Column(format: p => @Html.ActionLink("Chỉnh sửa", "ChinhSua", new { id = p.MaSP }, new { @class = "btn btn-success" })),
+    grid.Column(format: p => @Html.ActionLink("Xóa", "Xoa", new { id = p.MaSP }, new { @class = "btn btn-danger" }))
+    ))
+
+@*Css cho từng Style của table*@
+<style>
+    .divTable {
+        width: 100%;
+        border: 1px solid #999999;
+        text-align: center;
+    }
+
+        .divTable td {
+        }
+
+    .gridHead {
+        background-color: #4CAF50;
+    }
+
+        .gridHead > th > a {
+            color: #fff;
+        }
+
+        .gridHead > th {
+            color: #fff;
+            text-align: center;
+        }
+
+    .gridFooter {
+        font-weight: bold;
+        color: red;
+    }
+</style>
+

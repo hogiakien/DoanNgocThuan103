@@ -1,0 +1,67 @@
+﻿@using DoanNgocThuan103.Models
+@model IEnumerable<SanPham>
+@{
+    var listSanPham1 = ViewBag.lstSanPham1 as IEnumerable<SanPham>;
+    var listSanPham2 = ViewBag.lstSanPham2 as IEnumerable<SanPham>;
+}
+<div class=" h_menu4">
+    <ul class="memenu skyblue">
+        <li class="active grid" style="display: inline;"><a class="color8" href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+        @*Menu cho các sản phẩm chính của cửa hàng*@
+        @foreach (var groupItem in listSanPham1.GroupBy(n => n.LoaiSanPham))
+        {
+            if (groupItem.Key != null)
+            {
+                <li style="display: inline;">
+                    <a href="@Url.Action("TrangSanPham", "SanPham", new { @MaLoaiSP = groupItem.Key.MaLoaiSP })">@groupItem.Key.TenLoai</a>
+                    <div class="mepanel" style="display: none; opacity: 1;">
+                        <div class="row">
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <ul>
+                                        @foreach (var item in groupItem.GroupBy(n => n.MaLoaiSanPham))
+                                        {
+                                            if (item.Key != null)
+                                            {
+                                                <li><a href="@Url.Action("SanPham", "SanPham", new { @MaLoaiSP = groupItem.Key.MaLoaiSP, @IdMLSP = item.Key.IdMLSP })">@item.Key.TenLSP</a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        }
+
+
+        <li class="grid" style="display: inline;">
+            <a class="color2" href="#">Phụ kiện khác</a>
+            <div class="mepanel">
+                <div class="row">
+                    @foreach (var groupItem in listSanPham2.GroupBy(n => n.LoaiSanPham))
+                    {
+                        if (groupItem.Key != null)
+                        {
+                            <div class="col1">
+                                <div class="h_nav">
+                                    <a href="@Url.Action("TrangSanPham", "SanPham", new { @MaLoaiSP= groupItem.Key.MaLoaiSP })">@groupItem.Key.TenLoai</a>
+                                    <ul>
+                                        @foreach (var item in groupItem.GroupBy(n => n.MaLoaiSanPham))
+                                        {
+                                            <li><a href="@Url.Action("SanPham", "SanPham", new { @MaLoaiSP = groupItem.Key.MaLoaiSP, @IdMLSP = item.Key.IdMLSP })">@item.Key.TenLSP</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </li>
+       
+        
+    </ul>
+</div>
+

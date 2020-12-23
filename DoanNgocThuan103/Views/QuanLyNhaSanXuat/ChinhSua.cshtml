@@ -1,0 +1,102 @@
+﻿@model DoanNgocThuan103.Models.NhaSanXuat
+@{
+    ViewBag.Title = "ChinhSua";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<style type="text/css" media="screen">
+    #myForm label.error {
+        width: auto;
+        color: red;
+    }
+</style>
+
+@*bước 1 khi sử dụng control editor tinymce*@
+@*<script src="~/Content/tinymce/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "#ThongTin",
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    });
+</script>*@
+<h2>Chỉnh sửa nhà sản xuất</h2>
+@using (Html.BeginForm("ChinhSua", "QuanLyNhaSanXuat", FormMethod.Post, new { id="myForm",enctype = "multipart/form-data" }))
+{ 
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaNSX)
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenNSX,"Tên nhà sản xuất", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenNSX, new { htmlAttributes = new { @class = "form-control", @placeholder = "Please enter information" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ThongTin, "Thông tin", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.ThongTin, new { htmlAttributes = new { @class = "form-control" }, @placeholder = "Please enter information", @rows = "10", @cols = "115" })
+         
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div id="hinhanh">
+                    <img width="100" height="100" src="~/Content/images/sanpham/@Model.Logo">
+                    <br />
+                    <br />
+                </div>
+                <input type="file" name="HinhAnh" id="HinhAnh" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cập nhật" class="btn btn-lg btn-success" id="btnCapNhat" />
+                <a class="btn btn-lg btn-primary" href="@Url.Action("Index", "QuanLyNhaSanXuat")" role="button">Back List</a>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/additional-methods.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myForm").validate({
+            rules: {
+                TenNSX: {
+                    required: true,
+                    maxlength: 16,
+                    minlength: 3,
+                },
+                ThongTin: {
+                    required: true,
+                    maxlength: 50,
+                    minlength: 10,
+                },
+                HinhAnh: {
+                    extension: "png|jpe?g|gif"
+                }
+            },
+            messages: {
+                TenNSX: {
+                    required: "Vui lòng nhập thông tin",
+                    minlength: "Tối thiểu 3 ký tự", maxlength: "Tối đa 16 ký tự",
+                },
+                ThongTin: {
+                    required: "Vui lòng nhập thông tin",
+                    minlength: "Tối thiểu 10 ký tự", maxlength: "Tối đa 50 ký tự",
+                },
+                HinhAnh: {
+                    extension: "Định dạng phải là đuôi png|jpe?g|gif"
+                }
+            }
+        });
+    });
+</script>
+

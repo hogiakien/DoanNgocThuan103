@@ -1,0 +1,119 @@
+﻿@model DoanNgocThuan103.Models.NhaSanXuat
+@{
+    ViewBag.Title = "TaoMoi";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+@if (ViewBag.ThongBao == "Thêm thành công")
+{
+    <br />
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@ViewBag.ThongBao</strong>
+    </div>
+}
+@if (ViewBag.ThongBao == "Tên nhà cung cấp đã tồn tại")
+{
+    <br />
+    <div class="alert alert-danger alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@ViewBag.ThongBao</strong>
+    </div>
+}
+<style type="text/css" media="screen">
+    #myForm label.error {
+        width: auto;
+        color: red;
+    }
+</style>
+@*Bước 1 khi sử dụng control editor tinymce*@
+@*<script src="~/Content/tinymce/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: ".thongtin",
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    });
+</script>*@
+
+@*Bước 1(thêm hình ảnh): thêm vào BeginForm @enctype = "multipart/form-data"*@
+@using (Html.BeginForm("TaoMoi", "QuanLyNhaSanXuat", FormMethod.Post, new {  id = "myForm",@enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Thêm mới nhà sản xuất</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenNSX, "Tên nhà sản xuất", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenNSX, new { htmlAttributes = new { @class = "form-control", @placeholder = "Please enter information" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ThongTin, "Thông tin", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.ThongTin, htmlAttributes:  new { @class = "thongtin", @placeholder = "Please enter information", @rows="10",@cols="115" } )
+            </div>
+        </div>
+        @*Bước 2 thêm hình ảnh là chỉnh type = file*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Logo, "Hình ảnh logo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="HinhAnh" id="HinhAnh" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Thêm" class="btn btn-lg btn-success" role="button"  id="btnThem" />
+                <a class="btn btn-lg btn-primary" href="@Url.Action("Index", "QuanLyNhaSanXuat")" role="button">Back List</a>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/additional-methods.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myForm").validate({
+            rules: {
+                TenNSX: {
+                    required: true,
+                    maxlength: 16,
+                    minlength: 3,
+                },
+                ThongTin: {
+                    required: true,
+                    maxlength: 50,
+                    minlength: 10,
+                },
+                HinhAnh: {
+                    required: true,
+                    extension: "png|jpe?g|gif"
+                }
+            },
+            messages: {
+                TenNSX: {
+                    required: "Vui lòng nhập thông tin",
+                    minlength: "Tối thiểu 3 ký tự", maxlength: "Tối đa 16 ký tự",
+                },
+                ThongTin:{
+                    required: "Vui lòng nhập thông tin",
+                    minlength: "Tối thiểu 10 ký tự", maxlength: "Tối đa 50 ký tự",
+                },
+                HinhAnh: {
+                    required: "Vui lòng chọn logo",
+                    extension: "Định dạng phải là đuôi png|jpe?g|gif"
+                }
+            }
+        });
+    });
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

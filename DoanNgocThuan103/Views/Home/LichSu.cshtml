@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "LichSu";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+<link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!-- jQuery (cần thiết cho Bootstrap's JavaScript plugins) -->
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<!-- file css tùy chỉnh -->
+<link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'><!--//fonts-->
+<!-- start menu -->
+<link href="~/Content/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="~/Content/js/memenu.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".memenu").memenu();
+    });
+</script>
+<script src="~/Content/js/simpleCart.min.js"></script>
+<link rel="stylesheet" href="~/styles/style.css">
+<link rel="stylesheet" href="~/styles/stylecore.css">
+<link rel="stylesheet" href="~/styles/main.css">
+<script src="/styles/scriptcore.js"></script>
+<script src="/styles/script.js"></script>
+<script>
+    if (window.KTM) {
+        new window.KTM.Main('body');
+    }
+</script>
+
+<script>
+    if (window.KTM) {
+        new KTM.Utils.Redirector("en");
+    }
+</script>
+
+
+<div data-general-settings="{ &quot;translations&quot;: {&quot;ImageMissing&quot;:null,&quot;ViewMore&quot;:null,&quot;AllBikes&quot;:null,&quot;Next&quot;:null,&quot;Previous&quot;:null,&quot;Start&quot;:null,&quot;Color&quot;:null,&quot;On&quot;:null,&quot;Off&quot;:null,&quot;Year&quot;:null,&quot;Segment&quot;:null,&quot;Model&quot;:null,&quot;OrderPopularity&quot;:null,&quot;OrderName&quot;:null,&quot;Categories&quot;:null,&quot;Order&quot;:null,&quot;NewArrivals&quot;:null,&quot;SelectYourBike&quot;:null,&quot;ChooseBike&quot;:null,&quot;PleaseChooseYourBike&quot;:null,&quot;PleaseChooseYourBikeDescription&quot;:null,&quot;WhereToBuy&quot;:null,&quot;Wishlist&quot;:null,&quot;AddToWishlist&quot;:null,&quot;Added&quot;:null,&quot;GoBack&quot;:null,&quot;ProductAddedToWishlist&quot;:null,&quot;OK&quot;:null,&quot;IgnoreAndContinue&quot;:null,&quot;Comments&quot;:null} }" aria-hidden="true" hidden=""></div>
+
+<script>
+    if (document.querySelector('[href$=".pdf"],[href$=".zip"]')) {
+        document.querySelector('[href$=".pdf"],[href$=".zip"]').addEventListener("click",
+            function (obj) {
+                var link = this.getAttribute("href"),
+                    file = link.substr(link.lastIndexOf("/")).replace("/", ""),
+                    filetype = file.substr(file.lastIndexOf(".")).replace(".", ""),
+                    label = link.substring(0, link.lastIndexOf("/"))
+                        .substr(link.substring(0, link.lastIndexOf("/")).lastIndexOf("/")).replace("/", "");
+                ga('send', 'event', filetype, 'click', label);
+            });
+    }
+    if (document.querySelector(".product-header__finance-link")) {
+        document.querySelector(".product-header__finance-link").addEventListener("click",
+            function (obj) {
+                var market = document.querySelector('body').getAttribute('data-market'),
+                    model = this.getAttribute('data-model'),
+                    source = this.getAttribute('data-domain');
+                ga('send', 'event', source, 'finance-' + market.toUpperCase(), model);
+            });
+    }
+</script>
+
+<script src="/styles/scriptcore.js"></script>
+<script src="/styles/script.js"></script>
+
+<script>
+    if (window.KTM) {
+        new window.KTM.Main('body');
+    }
+</script>
+
+<script>
+    if (window.KTM) {
+        new KTM.Utils.Redirector("en");
+    }
+</script>
+
+<script src="/styles/react.production.min.js"></script>
+<script src="/styles/react-dom.production.min.js"></script>
+<script src="/styles/server.js"></script>
+
+
+
+
+<script type="text/javascript" id="">(function () { window._uxa = window._uxa || []; if ("undefined" === typeof CS_CONF) { window._uxa.push(["setPath", window.location.pathname + window.location.hash.replace("#", "?__")]); var a = document.createElement("script"); a.type = "text/javascript"; a.async = !0; a.src = "//t.contentsquare.net/uxa/1b27c549cea29.js"; document.getElementsByTagName("head")[0].appendChild(a) } else window._uxa.push(["trackPageview", window.location.pathname + window.location.hash.replace("#", "?__")]) })();</script>
+<script>(function () { var a = window._fbq || (window._fbq = []); if (!a.loaded) { var b = document.createElement("script"); b.async = !0; b.src = "//connect.facebook.net/en_US/fbds.js"; var c = document.getElementsByTagName("script")[0]; c.parentNode.insertBefore(b, c); a.loaded = !0 } a.push(["addPixelId", "512291922254077"]) })(); window._fbq = window._fbq || []; window._fbq.push(["track", "PixelInitialized", {}]);</script>
+<noscript></noscript>
+<script type="text/javascript" src="https://dl.episerver.net/13.2.6/epi-util/find.js"></script>
+<script type="text/javascript">
+    if (FindApi) { var api = new FindApi(); api.setApplicationUrl('/'); api.setServiceApiBaseUrl('/find_v2/'); api.processEventFromCurrentUri(); api.bindWindowEvents(); api.bindAClickEvent(); api.sendBufferedEvents(); }
+</script>
+<script>
+    ReactDOM.hydrate(React.createElement(Components.ColumnTeaser, { "segments": [{ "ImageUrl": "/img/adv790.jpg", "FullImageUrl": "/img/adv790.jpg", "BackgroundVideoUrl": "", "FocusX": 0, "FocusY": 0, "Title": "#GOADVENTURE", "Headline": "KTM Travel", "Subline": "Featured", "IconCssClass": "", "ButtonText": "Experience KTM Travel", "ButtonLink": "/en/travel/", "OverlayOpacity": 0, "MainIntro": null }, { "ImageUrl": "/img/ktmrc.jpg", "FullImageUrl": "/img/ktmrc.jpg", "BackgroundVideoUrl": "", "FocusX": 0, "FocusY": 0, "Title": "#Long distance thrills", "Headline": "KTM Sports Tourer", "Subline": "Featured", "IconCssClass": "", "ButtonText": "Experience KTM Sports Tourer", "ButtonLink": "/en/sports-tourer/", "OverlayOpacity": 0, "MainIntro": null }, { "ImageUrl": "img/nakebike.jpg", "FullImageUrl": "img/nakebike.jpg", "BackgroundVideoUrl": "", "FocusX": 0, "FocusY": 0, "Title": "#GETDUKED", "Headline": "KTM Naked", "Subline": "Featured", "IconCssClass": "", "ButtonText": "Experience KTM Naked", "ButtonLink": "/en/naked-bike/", "OverlayOpacity": 0, "MainIntro": null }, { "ImageUrl": "img/enduke.jpg", "FullImageUrl": "img/enduke.jpg", "BackgroundVideoUrl": "", "FocusX": 0, "FocusY": 0, "Title": "#Flat out moto for the street ", "Headline": "KTM Supermoto", "Subline": "Featured", "IconCssClass": "", "ButtonText": "Experience KTM Supermoto", "ButtonLink": "/en/supermoto/", "OverlayOpacity": 0, "MainIntro": null }, { "ImageUrl": "img/supper.jpg", "FullImageUrl": "img/supper.jpg", "BackgroundVideoUrl": "", "FocusX": 0, "FocusY": 0, "Title": "#Nothing hurts quite like second place", "Headline": "KTM MX", "Subline": "featured", "IconCssClass": "", "ButtonText": "Experience KTM MX", "ButtonLink": "/en/mx/", "OverlayOpacity": 0, "MainIntro": null }, { "ImageUrl": "img/mxmoto.jpg", "FullImageUrl": "img/mxmoto.jpg", "BackgroundVideoUrl": "", "FocusX": 0, "FocusY": 0, "Title": "#WHERE\u0027S YOUR LIMIT?", "Headline": "KTM Enduro", "Subline": "Featured", "IconCssClass": "", "ButtonText": "Experience KTM Enduro", "ButtonLink": "/en/enduro/", "OverlayOpacity": 0, "MainIntro": null }, { "ImageUrl": "img/eride.jpg", "FullImageUrl": "img/eride.jpg", "BackgroundVideoUrl": "", "FocusX": 0, "FocusY": 0, "Title": "#Ready to race closer to home", "Headline": "Freeride E", "Subline": "Featured", "IconCssClass": "", "ButtonText": "Experience KTM E-Ride", "ButtonLink": "/en/e-ride/", "OverlayOpacity": 0, "MainIntro": null }, { "ImageUrl": "img/freeride.jpg", "FullImageUrl": "img/freeride.jpg", "BackgroundVideoUrl": "", "FocusX": 0, "FocusY": 0, "Title": "Explore more spectacular views", "Headline": "KTM Freeride", "Subline": "Featured", "IconCssClass": "", "ButtonText": "Experience KTM Freeride", "ButtonLink": "/en/freeride/", "OverlayOpacity": 0, "MainIntro": null }, { "ImageUrl": "img/eride.jpg", "FullImageUrl": "img/eride.jpg", "BackgroundVideoUrl": "", "FocusX": 0, "FocusY": 0, "Title": "Pure performance for the street ", "Headline": "KTM Supersport", "Subline": "Featured", "IconCssClass": "", "ButtonText": "Experience KTM Supersport", "ButtonLink": "/en/supersport/", "OverlayOpacity": 0, "MainIntro": null }] }), document.getElementById("react_0HLUJDTHH1DA6"));
+    ReactDOM.hydrate(React.createElement(Components.Tagline, { "iconClassName": null, "text": "Featured" }), document.getElementById("react_0HLUJDTHH1DA7"));
+    ReactDOM.hydrate(React.createElement(Components.Tagline, { "iconClassName": null, "text": "Featured" }), document.getElementById("react_0HLUJDTHH1DA8"));
+    ReactDOM.hydrate(React.createElement(Components.Tagline, { "iconClassName": null, "text": "Featured" }), document.getElementById("react_0HLUJDTHH1DA9"));
+    ReactDOM.hydrate(React.createElement(Components.TeaserArticle, { "ArticleTeaserViews": [{ "Url": "/en/news/int/ktm-presents-gt2-class-project-for-sro-race-series/", "Heading": "NEW LIGHTWEIGHT SPORTSCAR KTM X-BOW GTX: KTM PRESENTS GT2 CLASS PROJECT FOR SRO RACE SERIES!", "Tagline": "News", "Description": "Performance and purism, united in a unique, extreme design, and armed for adventures on the most legendary race tracks in the world. With the new KTM X-BOW GTX, KTM Sportcar GmbH will show just where Austria\u0027s only car manufacturer and Europe\u0027s largest motorcycle manufacturer is heading. ", "ImageUrl": "img/car.jpg" }, { "Url": "/en/news/int/twelve-ktm-adventure-riders-set-for-the-ride-of-a-lifetime-at-the-ktm-ultimate-race-2020/", "Heading": "TWELVE KTM ADVENTURE RIDERS SET FOR THE RIDE OF A LIFETIME AT THE KTM ULTIMATE RACE 2020", "Tagline": "News", "Description": "Held within the upcoming Merzouga Rally on May 24 to 29, the second edition of the KTM ULTIMATE RACE will see 12 KTM ADVENTURE riders from Europe, South Africa, USA, Canada, Australia and New Zealand race aboard equally prepared KTM 790 ADVENTURE R RALLY machines.", "ImageUrl": "img/news2.jpg" }] }), document.getElementById("react_0HLUJDTHH1DAA"));
+    ReactDOM.hydrate(React.createElement(Components.NavWishlistQuantity, { "quantity": 0, "market": "int" }), document.getElementById("react_0HLUJDTHH1DAB"));
+</script>
+
+

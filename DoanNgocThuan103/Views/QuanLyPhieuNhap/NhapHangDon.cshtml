@@ -1,0 +1,139 @@
+﻿@model DoanNgocThuan103.Models.SanPham
+
+@{
+    ViewBag.Title = "NhapHangDon";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+<h2 style="text-align: center; color: red">Nhập hàng cho sản phẩm </h2>
+<br />
+<br />
+
+
+<legend><b style="color: rgb(25, 75, 227)">@Model.TenSP</b> </legend>
+<hr />
+<br />
+
+<div class="row">
+    <div class="col-md-3">
+        <img width="200" height="200" src="~/Content/images/sanpham/@Model.HinhAnh">
+        <br />
+        <br />
+
+    </div>
+    <div class="col-md-9">
+        <h3 style="color: rgb(25, 75, 227)">Thông tin sản phẩm</h3>
+        <div class="ttSP">
+            <h4>Hãng sản xuất: @Model.NhaSanXuat.TenNSX</h4>
+            <br />
+            <h4>Loại sản phẩm: @Model.LoaiSanPham.TenLoai</h4>
+            <br />
+            <h4>Số lượng tồn: @Model.SoLuongTon</h4>
+        </div>
+    </div>
+</div>
+<br />
+<fieldset>
+    <legend style="color: rgb(25, 75, 227)">Thông tin nhập hàng</legend>
+</fieldset>
+@using (Html.BeginForm("NhapHangDon", "QuanLyPhieuNhap", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Hidden("MaSP", Model.MaSP)
+    <div class="row">
+        <label class="control-label col-md-4">Nhà cung cấp</label>
+        <label class="control-label col-md-4">Số lượng nhập</label>
+        <label class="control-label col-md-4">Đơn giá nhập</label>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-4">
+            @{var lstNCC = (SelectList)ViewBag.MaNCC;}
+            @Html.DropDownList("MaNCC", lstNCC, new { @class = "MaNCC form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBox("SoLuongNhap","0",new {@class="form-control"})
+            <span id="tbSoLuongNhap"></span>
+        </div>
+        <div class="col-md-4">
+            @Html.TextBox("DonGiaNhap", "0", new { @class = "form-control" })
+            <span id="tbDonGiaNhap"></span>
+        </div>
+    </div>
+    <div class="clear right" style="text-align:right;">
+        <br />
+        <input type="submit" class="btn btn-success" value="Nhập hàng" id="btnNhapHang" />
+    </div>
+}
+<style>
+    .imgSP {
+        display: block;
+        margin: auto;
+        width: 50%;
+    }
+</style>
+
+<style>
+    .ttSP {
+        padding-top: 30px;
+        padding-right: 50px;
+    }
+</style>
+
+@*Đoạn script validate dữ liệu*@
+<script>
+    $(document)
+        .ready(function () {
+        $('#btnNhapHang').click(function () {
+
+            if (kiemtraDonGia() == false) {
+                //Nếu tồn tại 1 giá trị bất kỳ thuộc class đơn giá không phải số, thì ngăn không cho submit về server
+                return false;
+            }
+            if (kiemtraSoLuong() == false) {
+                return false;
+            }
+
+            alert("Nhập hàng thành công!");
+
+        });
+            //Kiểm tra đơn giá
+        function kiemtraDonGia() {
+            var bl = true;
+            //Duyệt vòng lặp each
+            $('#DonGiaNhap')
+                .each(function() {
+                    var giatri = $('#DonGiaNhap').val();
+                    if (giatri == "") {
+                        alert("Đơn giá nhập không được để trống!");
+                        bl = false;
+                        return bl;
+                    }
+                    if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+                        alert("Đơn giá nhập không hợp lệ!");
+                        bl = false;
+                        return bl;
+                    }
+                });            
+            return bl;
+        }
+        function kiemtraSoLuong() {
+            var bl = true;
+            //Duyệt vòng lặp each
+            $('#SoLuongNhap')
+                .each(function() {
+                    var giatri = $('#SoLuongNhap').val();
+                    if (giatri == "") {
+                        alert("Số lượng nhập không được để trống!");
+                        bl = false;
+                        return bl;
+                    }
+                    if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+                        alert("Số lượng nhập không hợp lệ!");
+                        bl = false;
+                        return bl;
+                    }
+                });
+            
+            return bl;
+        }
+        });
+</script>

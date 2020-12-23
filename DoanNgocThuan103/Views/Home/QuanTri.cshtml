@@ -1,0 +1,127 @@
+﻿
+@{
+
+    ViewBag.Title = "QuanTri";
+
+    Layout = "/Views/Layout/AdminLayout.cshtml";
+
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Thống kê số lượng sách đã bán hàng tháng</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-bar-chart-o fa-fw"></i> Biểu đồ thống kê số sách đã bán
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div id="sellMonth"></div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+@section jsFooter{
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Home/Statitical_sell',
+                data: {},
+                contentType: "application/json;charset=utf-8",
+                dataType: 'json',
+                success: function (res) {
+                    successFunc(res);
+                    console.log(res);
+                },
+                error: function (errormessage) {
+                    alert("error");
+                    console.log(errormessage.responseText);
+                }
+            });
+        });
+
+
+
+        var mob = {
+            init: function () {
+                mob.regEvents();
+            },
+            regEvents: function () {
+
+            }
+        }
+        mob.init();
+
+        function successFunc(jsondata) {
+            //var jsonData = jQuery.parseJSON(jsondata);
+
+            var month = [];
+            var total = ['total'];
+            jsondata.forEach(function (e) {
+                month.push('Tháng ' + e.month);
+                total.push(e.total);
+
+            })
+            console.log(month);
+            console.log(total);
+
+
+            var chart = c3.generate({
+                bindto: '#sellMonth',
+                data: {
+                    columns: [
+                        total
+
+                    ],
+
+                    type: 'area-spline',
+                },
+                axis: {
+
+                    x: {
+                        type: 'category', // this needed to load string x value
+                        categories: month,
+                        label: {
+                            text: 'Biểu đồ thống kê số lượng sách đã bán trong tháng',
+                            position: 'outer-center'
+                        }
+
+                    },
+
+                },
+                color: {
+                    total: '#ff0000'
+                },
+                labels: true
+            });
+
+            chart.data.names(
+                {
+                    total: 'Số sách bán được trong tháng.'
+                });
+        }
+
+
+    </script>
+}
+

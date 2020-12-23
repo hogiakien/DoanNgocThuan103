@@ -1,0 +1,28 @@
+﻿@using DoanNgocThuan103.Models;
+@model IEnumerable<DoanNgocThuan103.Models.DonDatHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+@if (TempData["ThongBao"] == "Hủy thành công")
+{
+    <br />
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Hủy thành công!</strong>
+    </div>
+}
+
+
+<h2>Quản lý đơn hàng</h2>
+<br />
+<div class='wrapper text-center'>
+    <div class="btn-group">
+        <a class="btn btn-default " href="@Url.Action("ChuaThanhToan","QuanLyDonHang")" role="button">Chưa thanh toán</a>
+        <a class="btn btn-default" href="@Url.Action("ChuaGiao", "QuanLyDonHang")" role="button">Chưa giao & Đã thanh toán</a>
+        <a class="btn btn-default " href="@Url.Action("DaGiaoDaThanhToan", "QuanLyDonHang")" role="button">Đã giao & Đã thanh toán</a>
+        <a class="btn btn-default " href="@Url.Action("DanhSachDonHangDaHuy", "QuanLyDonHang")" role="button">Danh sách đơn hàng đã hủy</a>
+    </div>
+</div>
+

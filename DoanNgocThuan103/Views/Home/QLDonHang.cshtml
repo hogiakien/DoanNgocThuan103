@@ -1,0 +1,57 @@
+﻿@model List<DoanNgocThuan103.Models.DonHangDTO>
+@{
+    ViewBag.Title = "Quản lý đơn hàng";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+
+    <div class="container">
+
+        @if (Model == null || Model.Count == 0)
+        {
+            <h1 style="color: #000;">Bạn chưa có đơn hàng. Vào mua sắm nào!!!</h1>
+        }
+        else
+        {
+            <h1 style="color: #000;">Đơn hàng bạn đã mua</h1>
+            <table class="table" style="text-align: center;">
+                <tr style="background-color: #4CAF50; color: white;">
+                    <td>Tên SP</td>
+                    <td>Số lượng</td>
+                    <td>Đơn giá</td>
+                    <td>Ngày đặt</td>
+                    <td>Tình trạng giao hàng</td>
+                    <td>Đã thanh toán</td>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr style="background-color: #f2f2f2;">
+                        <td>@item.TenSP</td>
+                        <td>@item.SoLuong</td>
+                        <td>@item.DonGia.Value.ToString("N0") VNĐ</td>
+                        <td>@item.NgayDat</td>
+                        @if (item.TinhTrangGiaoHang == true)
+                        {
+                            <td class="text-center"><button class="btn btn-success">Đã giao hàng</button></td>
+                        }
+                        else
+                        {
+                            <td class="text-center"><button class="btn btn-danger">Chưa giao hàng</button></td>
+                        }
+                        @if (item.DaThanhToan == true)
+                        {
+                            <td class="text-center"><button class="btn btn-success">Đã thanh toán</button></td>
+                        }
+                        else
+                        {
+                            <td class="text-center"><button class="btn btn-danger">Chưa thanh toán</button></td>
+                        }
+
+                    </tr>
+
+                }
+            </table>
+
+
+        }
+    </div>
+

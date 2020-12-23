@@ -1,0 +1,205 @@
+﻿@using DoanNgocThuan103.Models
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+    <link href="/Content/AdminLayout/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <!-- Custom CSS -->
+    <link href="/Content/AdminLayout/css/style.css" rel='stylesheet' type='text/css' />
+
+    <!-- Graph CSS -->
+    <link href="/Content/AdminLayout/css/font-awesome.css" rel="stylesheet">
+    <link href="~/assets/admin/c3/c3.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery -->
+    <!-- lined-icons -->
+    <link rel="stylesheet" href="~/Content/AdminLayout/css/icon-font.min.css" type='text/css' />
+    <!-- //lined-icons -->
+    <!-- chart -->
+    <script src="/Content/AdminLayout/js/Chart.js"></script>
+    <link href="/Content/jquery.bxslider.css" rel="stylesheet" />
+    <!-- //chart -->
+    <!--animate-->
+    <link href="/Content/AdminLayout/css/animate.css" rel="stylesheet" type="text/css">
+    <script src="/Content/AdminLayout/js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <!--//end-animate-->
+    <!----webfonts--->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='//fonts.googleapis.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    <!---//webfonts--->
+    <!-- Meters graphs -->
+    <script src="/Content/AdminLayout/js/jquery-1.10.2.min.js"></script>
+    <script src="/Content/ckeditor/ckeditor.js"></script>
+    <script src="/Content/ckfinder/ckfinder.js"></script>
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <script language="javascript">
+        $(document).ready(function () {
+            $('.editors').each(function () {
+                var editor = CKEDITOR.replace($(this).attr('id'), {
+                    // uiColor : '#9AB8F3',
+                    language: 'en',
+                    //plugins:'widget',
+                    skin: 'moono',
+                    width: '100%',
+                    height: 300,
+                    filebrowserBrowseUrl: '/Content/ckfinder/ckfinder.html',
+                    filebrowserImageBrowseUrl: '/Content/ckfinder/ckfinder.html?type=Images',
+                    filebrowserFlashBrowseUrl: '/Content/ckfinder/ckfinder.html?type=Flash',
+                    filebrowserUploadUrl: '/Content/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files',
+                    filebrowserImageUploadUrl: '/Content/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
+                    filebrowserFlashUploadUrl: '/Content/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash',
+                }).config.entities = false;
+            })
+        });
+
+    </script>
+</head>
+<body>
+
+    @if (Session["TaiKhoan"] != null)
+    {
+        ThanhVien tv = (ThanhVien)Session["TaiKhoan"];
+        <div class="total-content">
+            @Html.Action("MenuQuanTri", "Home")
+            <div class="col-md-9 content">
+                <div class="home-strip">
+                    <div class="sales" style="height:190px">
+                        <div class="icon">
+                            <i class="dollar"></i>
+                        </div>
+                        <div class="icon-text">
+                            <h3>@ViewBag.ThongKeDoanhThu</h3>
+                            <p>Doanh Thu</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="orders" style="height:190px">
+                        <div class="icon">
+                            <i class="order"></i>
+                        </div>
+                        <div class="icon-text">
+                            <h3>@ViewBag.ThongKeDDHMoi</h3>
+                            <p>New Order</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="member pull-right">
+                        <p>
+                            <a href="#"><i class="men"></i></a><a href="#">Tài khoản</a>
+                        </p>
+                        <div id="dd" class="wrapper-dropdown-2" tabindex="1">
+                            <span><img src="~/Content/AdminLayout/images/settings.png"></span>
+                            <ul class="dropdown">
+                                <li><a href="#">@tv.HoTen</a></li>
+                                <li>
+                                    <a href="/Home/DoiMatKhau"><i class="fa fa-gear fa-fw"></i>Đổi mật khẩu</a>
+                                </li>
+                                <li><a href="@Url.Action("DangXuat", "Home")">Đăng xuất</a></li>
+                                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                            </ul>
+                        </div>
+                        <!-----end-wrapper-dropdown-2---->
+                        <!-----start-script---->
+                        <script type="text/javascript">
+                            function DropDown(el) {
+                                this.dd = el;
+                                this.initEvents();
+                            }
+
+                            DropDown.prototype = {
+                                initEvents: function () {
+                                    var obj = this;
+
+                                    obj.dd.on('click',
+                                        function (event) {
+                                            $(this).toggleClass('active');
+                                            event.stopPropagation();
+                                        });
+                                }
+                            }
+                            $(function () {
+
+                                var dd = new DropDown($('#dd'));
+
+                                $(document)
+                                    .click(function () {
+                                        // all dropdowns
+                                        $('.wrapper-dropdown-2').removeClass('active');
+                                    });
+
+                            });
+                        </script>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+                <br />
+                <br />
+                <div id="page-wrapper">
+                    <div class="graphs">
+
+                        <div class="switches">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="footer">
+            <div class="copyright text-center">
+                <p>
+                    © 2015 All rights reserved | Template by <a href="http://w3layouts.com"> W3layouts</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="jqvmap-label" style="display: none;"></div>
+    }
+    else
+    {
+        // Redirect to error page if access to page which you dont have permission to access
+        <script language="javascript">
+            window.location.replace("/Home/PermissionError");
+        </script>
+        @RenderBody()
+    }
+    <script src="~/assets/admin/js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/assets/admin/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/assets/admin/js/metisMenu.min.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <!-- Morris Charts JavaScript -->
+    @*<script src="~/assets/admin/js//raphael.min.js"></script>
+        <script src="~/assets/admin/js//morris.min.js"></script>
+        <script src="~/assets/admin/js//morris-data.js"></script>*@
+
+    <script src="~/assets/admin/c3/c3.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/assets/admin/js/startmin.js"></script>
+
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

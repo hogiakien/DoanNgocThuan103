@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- harafunnel -->
+
+    <meta charset="UTF-8">
+    <title>Site bán hàng</title>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- jQuery (cần thiết cho Bootstrap's JavaScript plugins) -->
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- file css tùy chỉnh -->
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'><!--//fonts-->
+    <!-- start menu -->
+    <link href="~/Content/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+
+    <script type="text/javascript" src="~/Content/js/memenu.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".memenu").memenu();
+        });
+    </script>
+    <script src="~/Content/js/simpleCart.min.js"></script>
+    <link href="~/styles/stylecore.css" rel="stylesheet">
+    <style>
+        label.error{
+            color:red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="site-wrapper">
+        <main role="main">
+            <div class="cookie-warning" style="height:80px" data-cookie-warning="">
+                <p>
+                    We use our own and third party cookies in order to improve your experience and our service. With the aid of cookies we analyze the typical use pattern of visitors to the website. Your continued use of our website shall be conclusively deemed acceptance of the use of cookies. For further information please read our Privacy Policy.
+                </p>
+                <button aria-label="Close" data-cookie-warning-close=""></button>
+            </div>
+            <!-- header -->
+            <div class="header">
+                @Html.Partial("~/Views/Layout/HeaderTopPartial.cshtml")
+                <div class="container">
+                    <div class="head-top">
+                        <div class="logo">
+                            <a href="@Url.Action("Index", "Home")"><img src="~/Content/images/sanpham/logoe.jpg" alt="" style="width:165px;height:50px;"></a>
+                        </div>
+                        @Html.Action("MenuPartial", "Home")
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end header -->
+            <!-- banner -->
+            <div class="banner">
+                <div class="container">
+                    <script src="~/Content/js/responsiveslides.min.js"></script>
+                    <script>
+                        $(function () {
+                            $("#slider").responsiveSlides({
+                                auto: true,
+                                nav: true,
+                                speed: 500,
+                                namespace: "callbacks",
+                                pager: true
+                            });
+                        });
+                    </script>
+                    <div id="top" class="callbacks_container" style="min-height: 450px;">
+                        <ul class="rslides callbacks callbacks1" id="slider" style="min-height: 450px;">
+                            <li style="min-height: 450px;">
+                                <img src="~/Content/images/banner/banner1.jpg" style="min-height: 450px;" />
+                            </li>
+                            <li style="min-height: 450px;">
+                                <img src="~/Content/images/banner/banner2.jpg" />
+                            </li>
+                            <li style="min-height: 450px;">
+                                <img src="~/Content/images/banner/banner6.jpg" />
+                            </li>
+                            <li style="min-height: 450px;">
+                                <img src="~/Content/images/banner/banner5.jpg" />
+                            </li>
+                        </ul><a href="#" class="callbacks_nav callbacks1_nav prev">Previous</a><a href="#" class="callbacks_nav callbacks1_nav next">Next</a><ul class="callbacks_tabs callbacks1_tabs"><li class="callbacks1_s1 callbacks_here"><a href="#" class="callbacks1_s1">1</a></li><li class="callbacks1_s2"><a href="#" class="callbacks1_s2">2</a></li><li class="callbacks1_s3"><a href="#" class="callbacks1_s3">3</a></li></ul>
+                    </div>
+
+                </div>
+            </div>
+          
+
+          
+
+            
+
+
+
+
+            <!-- end banner -->
+            <!-- content -->
+            <div class="content">
+                @RenderBody()
+            </div>
+                         
+            <!-- end content -->
+            <!-- footer -->
+        </main>
+            @Html.Partial("~/Views/Layout/FooterPartial.cshtml")
+            <script type="text/javascript" src="https://ahachat.com/customer-chats/customer_chat_3sFPZJ9tzu5ec3b3935d348.js"></script>
+            <!-- end footer -->
+    </div>
+
+</body>
+</html>

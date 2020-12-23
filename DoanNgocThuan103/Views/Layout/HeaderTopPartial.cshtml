@@ -1,0 +1,100 @@
+﻿@using DoanNgocThuan103.Models
+
+<div class="header-top">
+    <div class="container">
+        <div class="search">
+            @* Tạo form submit  về action tìm kiếm*@
+            @using (@Html.BeginForm("LayTuKhoaTimKiem", "TimKiem"))
+            {
+                <input type="text" name="sTuKhoa" placeholder="Nhập từ khóa...">
+                <input type="submit" value="Tìm kiếm">
+            }
+        </div>
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+            }
+        </script>
+
+        <script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        <div class="header-left">
+            @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] != "")
+            {
+                ThanhVien tv = (ThanhVien)Session["TaiKhoan"];
+                if (tv.LoaiThanhVien.MaLoaiTV == 4)
+                {
+                    <ul>
+
+                        <li><a>@tv.HoTen</a></li>
+                        <li><a href="/Home/QLDonHang/@tv.MaThanhVien">Quản lý đơn hàng</a></li>
+                        <li>@Html.ActionLink("Đăng xuất", "DangXuat", "Home")</li>
+                        <li>@Html.ActionLink("Đổi mật khẩu", "DoiMatKhau", "Home")</li>
+                    </ul>
+                }
+
+                else
+                {
+                    <ul>
+
+                        <li><a>@tv.HoTen</a></li>
+                        <li><a>@Html.ActionLink("Vào trang quản trị", "QuanTri", "Home")</a></li>
+                        <li>@Html.ActionLink("Đăng xuất", "DangXuat", "Home")</li>
+                    </ul>
+                }
+            }
+            else
+            {
+                <ul>
+                    <li><a href="#" id="btnDangNhap">Đăng nhập</a></li>
+                    <li><a href="@Url.Action("DangKy", "Home")">Đăng ký</a></li>
+                </ul>
+            }
+            @*Tách icon giỏ hàng sang 1 partial view mới*@
+            @Html.Action("GioHangPartial", "GioHang")
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+
+<link href="~/Content/css/style_login.css" rel="stylesheet" />
+<div id="popup_login">
+    <div style="position: relative;">
+        <div style="position: absolute; margin-top: 1%; margin-left: 61%;">
+            <span id="close-form" class="btn btn-danger">X</span>
+        </div>
+       
+        <div class="login-form-login" style="-webkit-box-sizing: content-box !important; -moz-box-sizing: content-box !important; box-sizing: content-box !important;">
+            <h2>Đăng nhập</h2>
+            <div class="form-info-login">
+                @using (Html.BeginForm("DangNhap", "Home"))
+                {
+                    <input name="txtTenDangNhap" type="text" class="email" placeholder="Tên đăng nhập" required="">
+                    <input name="txtMatKhau" type="password" class="password" placeholder="Mật khẩu" required="">
+                    <p>
+                        <a href="#">Quên mật khẩu?</a>
+                    </p>
+                    <ul class="login-buttons-login">
+                        <li><input type="submit" id="submit-login" value="Đăng nhập"></li>
+                        <li><a href="@Url.Action("DangKy","Home")" class="hvr-sweep-to-left" style="margin-left:0px;height:52px;width:160px;padding:15px">Đăng ký</a></li>
+                        <div class="clear"> </div>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Sử dụng jquery hiển thị popup đăng nhập*@
+<script>
+    // Hiển thị popup_login
+    $("#btnDangNhap").click(function () {
+        $("#popup_login").show();
+    });
+    $("#close-form").click(function () {
+        $("#popup_login").hide();
+    });
+</script>
